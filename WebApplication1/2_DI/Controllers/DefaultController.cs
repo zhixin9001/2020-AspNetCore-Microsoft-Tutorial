@@ -22,13 +22,14 @@ namespace _2_DI.Controllers
         public ITransientTest transient { get; }
         public IScopedTest scoped { get; }
 
+        public ScopeAndTransientTester scopeAndTransientTester { get; }
 
         public DefaultController(/*OperationService operationService,*/
         //IOperationTransient transientOperation,
         //IOperationScoped scopedOperation,
         //IOperationSingleton singletonOperation,
         //IOperationSingletonInstance singletonInstanceOperation
-         ISingletonTest singleton, ITransientTest transient, IScopedTest scoped
+         ISingletonTest singleton, ITransientTest transient, IScopedTest scoped, ScopeAndTransientTester scopeAndTransientTester
             )
         {
             //OperationService = operationService;
@@ -40,13 +41,12 @@ namespace _2_DI.Controllers
             this.singleton = singleton;
             this.transient = transient;
             this.scoped = scoped;
-            //this.scopeAndTransientTester = scopeAndTransientTester;
+            this.scopeAndTransientTester = scopeAndTransientTester;
         }
 
         [HttpGet]
         public string Get()
         {
-            var scopeAndTransientTester = new ScopeAndTransientTester(singleton, transient, scoped);
             //return $"singleton={SingletonOperation.OperationId};transient={TransientOperation.OperationId};scoped={ScopedOperation.OperationId}";
             return $"singleton={singleton.guid}; \r\nscoped1={scoped.guid};\r\nscoped2={scopeAndTransientTester.ScopedID()};\r\ntransient={transient.guid};\r\ntransient2={scopeAndTransientTester.TransientID()};";
         }
