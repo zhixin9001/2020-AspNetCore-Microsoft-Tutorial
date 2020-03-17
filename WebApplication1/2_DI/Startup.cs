@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 
 namespace _2_DI
@@ -17,8 +18,11 @@ namespace _2_DI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<ISingletonTest, SingletonTest>();
+            services.TryAddSingleton<ISingletonTest, SingletonTest>();
             services.AddTransient<ITransientTest, TransientTest>();
             services.AddScoped<IScopedTest, ScopedTest>();
+            //services.AddTransient<ScopeAndTransientTester>();
+            //services.AddScoped(typeof(IScopedTest), typeof(ScopedTest));
 
             services.AddControllers();
 
@@ -28,7 +32,6 @@ namespace _2_DI
             services.AddSingleton<IOperationSingletonInstance>(new Operation(Guid.Empty));
 
             services.AddTransient<OperationService, OperationService>();
-            services.AddTransient<ScopeAndTransientTester, ScopeAndTransientTester>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
