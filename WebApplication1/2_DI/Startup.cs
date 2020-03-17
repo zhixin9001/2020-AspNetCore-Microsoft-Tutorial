@@ -16,10 +16,22 @@ namespace _2_DI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<ISingletonTest, SingletonTest>();
+            services.AddTransient<ITransientTest, TransientTest>();
+            services.AddScoped<IScopedTest, ScopedTest>();
+
+            services.AddControllers();
+
+            services.AddTransient<IOperationTransient, Operation>();
+            services.AddScoped<IOperationScoped, Operation>();
+            services.AddSingleton<IOperationSingleton, Operation>();
+            services.AddSingleton<IOperationSingletonInstance>(new Operation(Guid.Empty));
+
+            services.AddTransient<OperationService, OperationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env/*, ISingletonTest singleton, ITransientTest transient, IScopedTest scoped*/)
         {
             if (env.IsDevelopment())
             {
@@ -30,10 +42,11 @@ namespace _2_DI
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
+                //endpoints.MapGet("/", async context =>
+                //{
+                //    //await context.Response.WriteAsync($"singleton={singleton.guid};transient={transient.guid};scoped={scoped.guid}");
+                //});
             });
         }
     }
