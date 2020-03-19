@@ -28,6 +28,7 @@ namespace _3_Middleware
             }
 
             // Call the next delegate/middleware in the pipeline
+            await _next.Invoke(context);
             await _next(context);
         }
     }

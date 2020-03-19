@@ -68,10 +68,29 @@ namespace _3_Middleware
             //app.UseMiddleware<RequestCultureMiddleware>();
             app.UseRequestCulture();
 
-            app.Run(async (context) =>
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync(
+            //        $"Hello {CultureInfo.CurrentCulture.DisplayName}");
+            //});
+
+            app.Use(async (context, next) =>
             {
-                await context.Response.WriteAsync(
-                    $"Hello {CultureInfo.CurrentCulture.DisplayName}");
+                await context.Response.WriteAsync("middleware1 begin\r\n");
+                await next.Invoke();
+                await context.Response.WriteAsync("middleware1 end\r\n");
+            });
+
+            app.Use(async (context, next) =>
+            {
+                await context.Response.WriteAsync("middleware2 begin\r\n");
+                await next.Invoke();
+                await context.Response.WriteAsync("middleware2 end\r\n");
+            });
+
+            app.Run(async context =>
+            {
+                await context.Response.WriteAsync("end of pipeline.\r\n");
             });
         }
 
