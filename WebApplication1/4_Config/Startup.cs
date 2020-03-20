@@ -43,7 +43,7 @@ namespace _4_Config
 
                     var d = config.GetSection("cmd").Value;
                     var e = config.GetSection("cmd2").Value;
-                    await context.Response.WriteAsync($"Hello World!=={b}=={c}==cmd={d}==cmd2={e}");
+                    await context.Response.WriteAsync($"Hello World!=={b}=={c}==cmd={d}==cmd2={e},CommandLineKey1={config.GetSection("environment").Value},sss={config.GetSection("Env1").Value}");
                 });
             });
         }

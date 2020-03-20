@@ -16,6 +16,13 @@ namespace _4_Config
             CreateHostBuilder(args).Build().Run();
         }
 
+        public static readonly Dictionary<string, string> _switchMappings =
+ new Dictionary<string, string>
+ {
+        { "-CLKey1", "CommandLineKey1" },
+        { "-CLKey2", "CommandLineKey2" }
+ };
+
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureHostConfiguration(config =>
@@ -30,7 +37,12 @@ namespace _4_Config
                     config.AddJsonFile("config1.json", optional: true, reloadOnChange: true);
                     //config.AddCommandLine(args);
                     //config.Sources.Clear();
+                    config.AddEnvironmentVariables("CUSTOM_");
                 })
+            //.ConfigureAppConfiguration((hostingContext, config) =>
+            //{
+            //    config.AddCommandLine(args, _switchMappings);
+            //})
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
