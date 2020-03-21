@@ -1,0 +1,11 @@
+﻿{
+  "starship": {
+    "name": "USS Enterprise",
+    "registry": "NCC-1701",
+    "class": "Constitution",
+    "length": 304.8,
+    "commissioned": false,
+    "Array": ["12","23","d3"]
+  },
+  "trademark": "Paramount Pictures Corp. http://www.paramount.com"
+}

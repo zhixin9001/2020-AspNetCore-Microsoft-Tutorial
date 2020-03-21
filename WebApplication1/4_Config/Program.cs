@@ -35,6 +35,7 @@ namespace _4_Config
 
                     config.AddInMemoryCollection(dict);
                     config.AddJsonFile("config1.json", optional: true, reloadOnChange: true);
+                    config.AddJsonFile("starship.json", optional: true, reloadOnChange: true);
                     //config.AddCommandLine(args);
                     //config.Sources.Clear();
                     config.AddEnvironmentVariables("CUSTOM_");
