@@ -31,6 +31,13 @@ namespace _4_Config
             
             services.AddSingleton<IStarship>(starship);
             services.AddControllers();
+
+            services.Configure<MyOptionsWithDelegateConfig>(options =>
+            {
+                options.Option1 = "";
+            });
+
+            services.Configure<MySubOptions>(_config.GetSection("subsection1"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +63,7 @@ namespace _4_Config
 
                 //    var d = config.GetSection("cmd").Value;
                 //    var e = config.GetSection("cmd2").Value;
+
                 //    await context.Response.WriteAsync($"Hello World!=={b}=={c}==cmd={d}==cmd2={e},CommandLineKey1={config.GetSection("environment").Value},sss={config.GetSection("Env1").Value}");
                 //});
             });
