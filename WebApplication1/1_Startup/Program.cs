@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 
 namespace _1_Startup
 {
@@ -29,9 +32,9 @@ namespace _1_Startup
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration((hostingContext, config) =>
-            {
-            })
+            //.ConfigureAppConfiguration((hostingContext, config) =>
+            //{
+            //})
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.ConfigureServices((c, services) =>

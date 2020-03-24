@@ -1,3 +1,7 @@
+- 服务的生命周期
+- 链式注入时，生存期的选择
+- TryAdd与泛型注入
+- 替换内置服务容器
 
 ASP.NET Core提供了默认的依赖注入容器，可以在Startup.ConfigureServices方法中进行服务注入的配置。
 
@@ -82,7 +86,7 @@ transient2=d2a8ea1c-ae0b-4732-b0a1-ca186897e676;
 
 用Guid来表示不同的实例。对比两次请求可见AddSingleton方式的id值相同；AddScope方式两次请求之间不同，但同一请求内是相同的；AddTransient方式在同一请求内的多次注入间都不相同。
 
-### 
+### TryAdd与泛型注入
 另外还有TryAdd{Lifetime}方式，如果只希望在同类型的服务尚未注册时才添加服务，可以使用这种方法。如果直接使用Add{Liffetime}，则多次使用会重复注册。
 
 除了Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()这种用法，还可以这另一个重载写法：

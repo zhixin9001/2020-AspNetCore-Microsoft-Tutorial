@@ -1,4 +1,7 @@
-
+- Startup构造函数
+- ConfigureServices方法
+- Configure方法
+- 在ConfigureWebHostDefaults中直接配置服务和请求管道
 
 ASP.NET Core一般使用Startup类来进行应用的配置。在构建应用主机时指定Startup类，通常通过在主机生成器上调用WebHostBuilderExtensions.UseStartup<TStartup> 方法来指定 Startup类：
 ```
@@ -48,7 +51,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ### Configure方法
 Configure 方法用于指定应用响应 HTTP 请求的方式。 可通过将中间件组件添加到 IApplicationBuilder 实例来配置请求管道。 Configure 方法参数中的IApplicationBuilder不需要在服务容器中注册就可使用，它已由主机创建好并直接传递给了Configure方法。
-Configure方法由一些列的Use扩展方法组成：
+Configure方法由一系列的Use扩展方法组成：
 ```
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
@@ -72,7 +75,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
 在Configure方法参数中，可以根据自己的需要注入像IWebHostEnvironment, ILoggerFactory之类的服务，或者是在ConfigureServices方法中添加到DI容器中的服务。
 
-### 不使用Startup
+### 在ConfigureWebHostDefaults中直接配置服务和请求管道
 ASP.NET Core还提供了不使用Startup类而能够配置服务和请求管道的方式。也可以在ConfigureWebHostDefaults上调用它提供的ConfigureServices和Configure方法。
 ```
 public static IHostBuilder CreateHostBuilder(string[] args) =>

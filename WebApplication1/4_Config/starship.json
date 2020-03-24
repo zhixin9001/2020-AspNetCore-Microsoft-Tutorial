@@ -5,7 +5,10 @@
     "class": "Constitution",
     "length": 304.8,
     "commissioned": false,
-    "Array": ["12","23","d3"]
+    "Array": [ "12", "23", "d3" ],
+    "ShipLog": {
+      "ID": "1"
+    }
   },
   "trademark": "Paramount Pictures Corp. http://www.paramount.com"
 }

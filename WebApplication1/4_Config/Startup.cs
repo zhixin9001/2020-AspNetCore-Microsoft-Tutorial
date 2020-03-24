@@ -16,8 +16,11 @@ namespace _4_Config
         private readonly IConfiguration _config;
         public Startup(IConfiguration config)
         {
-            var a = config.GetSection("key1").Value;
-            var b = config.GetSection("section0:key0").Value;
+            var a = config.GetSection("key1");
+
+            var b = config.GetSection("section0");
+            var c = b.GetValue<string>("key0");
+            var b1 = b.GetChildren();
             _config = config;
         }
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -25,6 +28,7 @@ namespace _4_Config
         public void ConfigureServices(IServiceCollection services)
         {
             var starship = _config.GetSection("starship").Get<Starship>();
+            
             services.AddSingleton<IStarship>(starship);
             services.AddControllers();
         }
