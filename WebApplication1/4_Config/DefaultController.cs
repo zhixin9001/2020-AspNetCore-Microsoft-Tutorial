@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,9 @@ namespace _4_Config
     [ApiController]
     public class DefaultController : ControllerBase
     {
-        public DefaultController(IStarship starship)
+        public DefaultController(IStarship starship, IOptionsMonitor<MySubOptions> subOptionsAccessor)
         {
+
         }
 
         [HttpGet]
