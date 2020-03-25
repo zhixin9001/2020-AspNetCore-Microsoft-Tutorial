@@ -1,4 +1,9 @@
 
+- 配置规则
+- 命令行配置提供程序
+- 环境变量配置提供程序
+- 文件配置提供程序
+- 配置的读取
 
 ASP.NET Core中的配置项可以通过命令行、环境变量、json/xml/ini配置文件来提供。
 
@@ -121,7 +126,7 @@ section1 = configuration.GetSection("section1");
 ```
 对于GetSection的结果，可以使用GetValue<T>来获取单个键的值，也可以使用GetChild来获取获取子节键下的所有配置。
 
-使用Get<T>可以直接把配置内容绑定到类：
+使用Get<T>可以直接把配置内容绑定到类，支持数组、嵌套类的解析：
 ```
 var starship = _config.GetSection("starship").Get<Starship>();
 ```
@@ -133,20 +138,28 @@ var starship = _config.GetSection("starship").Get<Starship>();
     "class": "Constitution",
     "length": 304.8,
     "commissioned": false,
-    "Array": ["12","23","d3"]
+    "Array": [ "12", "23", "d3" ],
+    "ShipLog": {
+      "ID": "1"
+    }
   }
   ...
 }
 ```
 ```
-public class Starship
+public class Starship 
 {
-    public string Name { get; set; }
-    public string Registry { get; set; }
-    public string Class { get; set; }
-    public decimal Length { get; set; }
-    public bool Commissioned { get; set; }
-    public string[] Array { get; set; }
+	public string Name { get; set; }
+	public string Registry { get; set; }
+	public string Class { get; set; }
+	public decimal Length { get; set; }
+	public bool Commissioned { get; set; }
+	public ShipLog ShipLog { get; set; }
+	public string[] Array { get; set; }
+}
+public class ShipLog
+{
+	public string ID { get; set; }
 }
 ```
 

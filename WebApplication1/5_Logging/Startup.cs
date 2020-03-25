@@ -20,7 +20,7 @@ namespace _5_Logging
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,ILogger<Program> logger,ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Program> logger, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -34,8 +34,9 @@ namespace _5_Logging
                 endpoints.MapGet("/", async context =>
                 {
                     logger.LogInformation("ttee22");
-                    var a= loggerFactory.CreateLogger("assembly1");
+                    var a = loggerFactory.CreateLogger("assembly1");
                     a.LogInformation("lll333");
+                    a.LogInformation(1001, "sdf", "6");
                     await context.Response.WriteAsync("Hello World!");
                 });
             });
