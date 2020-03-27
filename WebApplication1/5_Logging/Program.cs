@@ -26,7 +26,7 @@ namespace _5_Logging
                 logging.AddFilter(level => level > LogLevel.Trace);
                 
                 logging.AddFilter("System", LogLevel.Debug)
-          .AddFilter<DebugLoggerProvider>("Microsoft", LogLevel.Trace);
+                    .AddFilter<DebugLoggerProvider>("Microsoft", LogLevel.Trace);
                 logging.AddDebug();
             })
                 .ConfigureWebHostDefaults(webBuilder =>
