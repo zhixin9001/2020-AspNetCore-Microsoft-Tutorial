@@ -1,4 +1,7 @@
-
+- 配置规则
+- 命令行配置提供程序
+- 环境变量配置提供程序
+- 文件配置提供程序
 
 ASP.NET Core中的配置项可以通过命令行、环境变量、json/xml/ini配置文件来提供。
 
@@ -56,7 +59,7 @@ section1:key1
 })
 ```
 
-在ConfigurationBuilder 的实例上调用 AddCommandLine 扩展方法可以激活命令行配置，不过CreateDefaultBuilder已经自动调用了AddCommandLine，并且命令行配置的优先级最高。若要添加其他配置提供程序并保持能够用命令行参数替代这些提供程序的配置，可以在ConfigureAppConfiguration中添加完其他提供程序后，在调用一次AddCommandLine。
+在ConfigurationBuilder 的实例上调用 AddCommandLine 扩展方法可以激活命令行配置，不过CreateDefaultBuilder已经自动调用了AddCommandLine，并且命令行配置的优先级最高。若要添加其他配置提供程序并保持能够用命令行参数替代这些提供程序的配置，可以在ConfigureAppConfiguration中添加完其他提供程序后，再调用一次AddCommandLine。
 ```
 .ConfigureAppConfiguration((hostingContext, config) =>
 {
@@ -108,20 +111,20 @@ AddEnvironmentVariables方法还有一个重载支持加载指定前缀的环境
 以这种顺序添加，后面MyConfig.{env.EnvironmentName}.json中的配置会覆盖MyConfig.json中的同名配置。
 
 ### 配置的读取
-GetValue<T> 
+#### GetValue<T> 
 从配置中提取一个具有指定键的值，并将它转换为指定的类型
 ```
 var number = Configuration.GetValue<int>("NumberKey", 99);
 ```
 
-GetSection
+#### GetSection
 会返回具有指定子节键的配置子节
 ```
 section1 = configuration.GetSection("section1");
 ```
 对于GetSection的结果，可以使用GetValue<T>来获取单个键的值，也可以使用GetChild来获取获取子节键下的所有配置。
 
-使用Get<T>可以直接把配置内容绑定到类：
+#### 使用Get<T>可以直接把配置内容绑定到类
 ```
 var starship = _config.GetSection("starship").Get<Starship>();
 ```
