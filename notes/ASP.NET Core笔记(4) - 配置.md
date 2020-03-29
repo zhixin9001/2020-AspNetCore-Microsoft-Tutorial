@@ -3,6 +3,12 @@
 - 环境变量配置提供程序
 - 文件配置提供程序
 
+- 配置规则
+- 命令行配置提供程序
+- 环境变量配置提供程序
+- 文件配置提供程序
+- 配置的读取
+
 ASP.NET Core中的配置项可以通过命令行、环境变量、json/xml/ini配置文件来提供。
 
 Web应用在生成主机时会调用CreateDefaultBuilder方法，这个方法按照下面的顺序添加各种配置提供程序：
@@ -136,20 +142,28 @@ var starship = _config.GetSection("starship").Get<Starship>();
     "class": "Constitution",
     "length": 304.8,
     "commissioned": false,
-    "Array": ["12","23","d3"]
+    "Array": [ "12", "23", "d3" ],
+    "ShipLog": {
+      "ID": "1"
+    }
   }
   ...
 }
 ```
 ```
-public class Starship
+public class Starship 
 {
-    public string Name { get; set; }
-    public string Registry { get; set; }
-    public string Class { get; set; }
-    public decimal Length { get; set; }
-    public bool Commissioned { get; set; }
-    public string[] Array { get; set; }
+	public string Name { get; set; }
+	public string Registry { get; set; }
+	public string Class { get; set; }
+	public decimal Length { get; set; }
+	public bool Commissioned { get; set; }
+	public ShipLog ShipLog { get; set; }
+	public string[] Array { get; set; }
+}
+public class ShipLog
+{
+	public string ID { get; set; }
 }
 ```
 
