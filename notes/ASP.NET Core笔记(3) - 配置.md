@@ -1,13 +1,10 @@
-- 配置规则
-- 命令行配置提供程序
-- 环境变量配置提供程序
-- 文件配置提供程序
 
 - 配置规则
 - 命令行配置提供程序
 - 环境变量配置提供程序
 - 文件配置提供程序
 - 配置的读取
+- 自定义配置数据源
 
 ASP.NET Core中的配置项可以通过命令行、环境变量、json/xml/ini配置文件来提供。
 
@@ -166,6 +163,77 @@ public class ShipLog
 	public string ID { get; set; }
 }
 ```
+
+### 自定义配置数据源
+除了上述配置提供程序，还可以自定义配置数据源，比如可以统一从配置中心获取配置。
+要自定义配置源，需要实现IConfigurationSource和IConfigurationProvider。
+
+实现IConfigurationSource：
+```
+class MyConfigurationSource : IConfigurationSource
+{
+    public IConfigurationProvider Build(IConfigurationBuilder builder)
+    {
+        return new MyConfigurationProvider();
+    }
+}
+```
+实现IConfigurationProvider，具体方式可以通过继承ConfigurationProvider，然后重写它的虚方法。下面的示例重写了Load方法，在这里可以自行编码获取配置、设置到this.Data，Data是一个键和值类型都是string的字典，用于存储配置。还用了一个定时器来模拟配置的变更，在发生配置变更时，触发base.OnReload();
+```
+class MyConfigurationProvider : ConfigurationProvider
+{
+    Timer timer;
+
+    public MyConfigurationProvider() : base()
+    {
+        timer = new Timer();
+        timer.Elapsed += (a, b) => Load(true);
+        timer.Interval = 3000;
+        timer.Start();
+    }
+
+    public override void Load()
+    {
+        //加载数据
+        Load(false);
+    }
+
+    void Load(bool reload)
+    {
+        this.Data["lastTime"] = DateTime.Now.ToString();            
+        if (reload)
+        {
+            base.OnReload();
+        }
+    }
+}
+```
+使用的时候：*builder.Add(new MyConfigurationSource());*
+
+但这种方法会暴露具体的实现，可以封装为扩展方法。如果把这个扩展类的命名空间指定为Microsoft.Extensions.Configuration，这样在分发到第三方后，就可以直接使用，而不必using程序集的命名空间，而前面的实现类默认为internal，第三方无法访问到，实现了整个类库只暴露出一个扩展方法的效果。
+```
+namespace Microsoft.Extensions.Configuration
+{
+    public static class MyConfigurationBuilderExtensions
+    {
+        public static IConfigurationBuilder AddMyConfiguration(this IConfigurationBuilder builder)
+        {
+            builder.Add(new MyConfigurationSource());
+            return builder;
+        }
+    }
+}
+```
+监听配置变更的方法：
+```
+builder.AddMyConfiguration();
+var configRoot = builder.Build();
+ChangeToken.OnChange(() => configRoot.GetReloadToken(), () =>
+{
+    //监听到配置变更后的处理代码
+});
+```
+
 
 
 

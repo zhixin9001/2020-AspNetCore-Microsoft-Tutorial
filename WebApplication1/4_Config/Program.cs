@@ -25,7 +25,7 @@ namespace _4_Config
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureHostConfiguration(config =>
+                            .ConfigureHostConfiguration(config =>
                 {
                     var dict = new Dictionary<string, string>
                     {
@@ -39,11 +39,12 @@ namespace _4_Config
                     //config.AddCommandLine(args);
                     //config.Sources.Clear();
                     config.AddEnvironmentVariables("CUSTOM_");
+                    
                 })
-            //.ConfigureAppConfiguration((hostingContext, config) =>
-            //{
-            //    config.AddCommandLine(args, _switchMappings);
-            //})
+                //.ConfigureAppConfiguration((hostingContext, config) =>
+                //{
+                //    config.AddCommandLine(args, _switchMappings);
+                //})
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

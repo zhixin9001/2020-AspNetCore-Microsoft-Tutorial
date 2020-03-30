@@ -26,12 +26,11 @@ namespace geektime_Config
 
         void Load(bool reload)
         {
-            this.Data["lastTime"] = DateTime.Now.ToString();
+            this.Data["lastTime"] = DateTime.Now.ToString();            
             if (reload)
             {
                 base.OnReload();
             }
         }
-
     }
 }

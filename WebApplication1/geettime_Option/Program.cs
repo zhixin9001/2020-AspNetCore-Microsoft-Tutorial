@@ -18,6 +18,10 @@ namespace geettime_Option
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+            .ConfigureHostConfiguration(config =>
+            {
+                config.AddMyConfiguration();
+            })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

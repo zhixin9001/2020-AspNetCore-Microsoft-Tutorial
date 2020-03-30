@@ -2,8 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using geektime_Config;
 
-namespace geektime_Config
+namespace Microsoft.Extensions.Configuration
 {
     public static class MyConfigurationBuilderExtensions
     {

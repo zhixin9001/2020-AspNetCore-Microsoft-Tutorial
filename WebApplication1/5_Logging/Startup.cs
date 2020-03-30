@@ -33,10 +33,16 @@ namespace _5_Logging
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    logger.LogInformation("ttee22");
-                    var a = loggerFactory.CreateLogger("assembly1");
-                    a.LogInformation("lll333");
-                    a.LogInformation(1001, "sdf", "6");
+                    //logger.LogInformation("ttee22");
+                    //var a = loggerFactory.CreateLogger("assembly1");
+                    //a.LogInformation("lll333");
+                    //a.LogInformation(1001, "sdf", "6");
+                    //using (logger.BeginScope("ScopeId:{scopeId}", Guid.NewGuid()))
+                    //{
+                    //    //logger.LogInformation("这是Info");
+                    //    //logger.LogError("这是Error");
+                    //    //logger.LogTrace("这是Trace");
+                    //}
                     await context.Response.WriteAsync("Hello World!");
                 });
             });

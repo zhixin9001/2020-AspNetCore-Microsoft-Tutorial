@@ -26,7 +26,7 @@ namespace geettime_Option.Controllers
         [HttpGet]
         public string Get([FromServices]IOrderService orderService)
         {
-            var res = $"orderService.ShowMaxOrderCount:{orderService.ShowMaxOrderCount()}";
+            var res = $"orderService.ShowMaxOrderCount:{orderService.ShowMaxOrderCount()},time={orderService.ShowTime()}";
             Console.WriteLine(res);
             return res;
         }

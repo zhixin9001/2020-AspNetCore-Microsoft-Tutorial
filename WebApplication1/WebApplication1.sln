@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5_Logging", "5_Logging\5_Lo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "geektime_Config", "geektime_Config\geektime_Config.csproj", "{FFDC3EB3-D8E6-438B-9864-4D1A098F04D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "geettime_Option", "geettime_Option\geettime_Option.csproj", "{0DA59B87-C3D8-426B-A978-4F6DCA01C524}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "geettime_Option", "geettime_Option\geettime_Option.csproj", "{0DA59B87-C3D8-426B-A978-4F6DCA01C524}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "geektime_Logging", "geektime_Logging\geektime_Logging.csproj", "{650D62AA-8681-4024-959D-0A4DE8ED28C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{0DA59B87-C3D8-426B-A978-4F6DCA01C524}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DA59B87-C3D8-426B-A978-4F6DCA01C524}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DA59B87-C3D8-426B-A978-4F6DCA01C524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{650D62AA-8681-4024-959D-0A4DE8ED28C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{650D62AA-8681-4024-959D-0A4DE8ED28C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{650D62AA-8681-4024-959D-0A4DE8ED28C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{650D62AA-8681-4024-959D-0A4DE8ED28C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

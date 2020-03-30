@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Primitives;
 
 namespace geettime_Option
 {
@@ -18,6 +19,7 @@ namespace geettime_Option
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            var a=Configuration.GetValue<string>("lastTime");
         }
 
         public IConfiguration Configuration { get; }
@@ -25,7 +27,9 @@ namespace geettime_Option
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.Configure<OrderServiceOptions>(Configuration.GetSection("OrderService"));
+            //ChangeToken.OnChange(() => Configuration.GetReloadToken(), () => {
+            //    Console.WriteLine("reload");
+            //});
             services.AddOrderService(Configuration.GetSection("OrderService"));
             services.AddControllers();
         }
