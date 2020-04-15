@@ -1,10 +1,14 @@
 
-### 中间件管道
+- 中间件管道模型
+- 中间件的配置
+- 自定义中间件
+
+
 中间件是一类装配在应用管道的代码，负责处理请求和响应。每个中间件都可在管道中的下一个组件前后执行工作，并选择是否将请求传递到管道中的下一个中间件。在Startup.Configure方法中可以进行中间件的装配。
 
 ### 中间件管道模型
 中间件管道模型如下图所示：
-【图】
+![中间件管道模型](https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/middleware/index/_static/request-delegate-pipeline.png?view=aspnetcore-3.1)
 
 ASP.NET Core请求管道包含一系列请求委托，沿黑色箭头依次被调用执行，每个委托均可在下一个委托前后执行操作。这种模型也被形象地称为“俄罗斯套娃”。
 
@@ -19,7 +23,8 @@ public void Configure(IApplicationBuilder app)
 }
 ```
 
-配置中间件会使用到三个（类）扩展方法：
+### 中间件的配置
+配置中间件会使用到三个扩展方法：
 - Use
 - Run
 - Map
@@ -93,6 +98,7 @@ public void Configure(IApplicationBuilder app)
 }
 ```
 这段代码为管道创建了三个分支：
+URL | Response
 -|-
 localhost:1234	|Hello from non-Map delegate.
 localhost:1234/map1	|Map Test 1
